@@ -28,6 +28,7 @@ const included = [
   "Product inventory with links",
   "Project implementation notes",
   "Final virtual walk-through of the space — to assess implementation and suggest any adjustments",
+  "One set of revisions",
 ];
 
 const tiers = [
@@ -87,6 +88,9 @@ function Services() {
               </li>
             ))}
           </ul>
+          <p className="md:col-span-12 text-center text-sm italic text-muted-foreground mt-4 px-4">
+            I am not certified to make structural changes but I will happily work with your architect or engineer should such changes be recommended.
+          </p>
         </div>
       </section>
 
