@@ -27,7 +27,6 @@ const included = [
   "3D rendering",
   "Product inventory with links",
   "Project implementation notes",
-  "Final virtual walk-through of the space — to assess implementation and suggest any adjustments",
   "One set of revisions",
 ];
 
@@ -99,8 +98,8 @@ function Services() {
             },
             {
               n: "04",
-              title: "Your first round of revisions",
-              body: "You review the 2D plan and share your feedback. One full round of revisions is included — Jill refines the layout until the plan feels right.",
+              title: "Make it yours — one chance to shape the plan",
+              body: "You review the 2D plan and share your feedback. One full round of revisions is included.",
             },
             {
               n: "05",
@@ -116,6 +115,11 @@ function Services() {
               n: "07",
               title: "Final delivery",
               body: "You receive the complete design package: final 2D drawings, the 3D rendering, and your full product inventory with purchase links — everything you need to bring the space to life at your own pace.",
+            },
+            {
+              n: "08",
+              title: "Virtual walk-through of the finished space",
+              body: "Once you've implemented the design, Jill meets with you over video to walk through the completed space together — assessing the result and suggesting any final adjustments to make it perfect.",
             },
           ].map((step) => (
             <li key={step.n} className="flex gap-6">
