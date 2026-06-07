@@ -34,7 +34,7 @@ export function SiteFooter() {
               <Instagram size={16} />
             </a>
             <a
-              href="https://www.facebook.com/thewelcomehomeinteriordesignsolutions"
+              href="https://www.facebook.com/search/top?q=your%20virtual%20decorator%3Acreating%20authentic%20spaces"
               target="_blank"
               rel="noreferrer"
               aria-label="Facebook"
