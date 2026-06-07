@@ -71,6 +71,68 @@ function Services() {
         </div>
       </section>
 
+      {/* PROCESS */}
+      <section className="mx-auto max-w-7xl px-6 lg:px-12 py-20">
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <span className="text-xs uppercase tracking-[0.3em] text-accent">How it works</span>
+          <h2 className="font-display text-4xl mt-4">From first question<span className="italic text-accent"> to finished room.</span></h2>
+          <p className="mt-4 text-foreground/75 font-light leading-relaxed">
+            A clear, collaborative process — entirely virtual, designed around your life.
+          </p>
+        </div>
+        <ol className="relative grid md:grid-cols-2 gap-x-16 gap-y-12">
+          {[
+            {
+              n: "01",
+              title: "Complete the questionnaire",
+              body: "You'll receive a short questionnaire covering your space, how you use it, your style preferences, and your budget. This gives Jill everything she needs to come to your first conversation prepared.",
+            },
+            {
+              n: "02",
+              title: "Video consultation with Jill",
+              body: "Jill meets with you one-on-one over video to walk through your answers, ask follow-up questions, and establish a shared vision for the space. This is where the design relationship begins.",
+            },
+            {
+              n: "03",
+              title: "Initial 2D floor plan",
+              body: "Jill produces an initial 2D rendering of your proposed space — furniture placement, traffic flow, and functional zones — giving you a clear picture of the plan before any money is spent.",
+            },
+            {
+              n: "04",
+              title: "Your first round of revisions",
+              body: "You review the 2D plan and share your feedback. One full round of revisions is included — Jill refines the layout until the plan feels right.",
+            },
+            {
+              n: "05",
+              title: "3D rendering + materials list",
+              body: "With the layout confirmed, Jill brings the space to life in 3D — showing finishes, furniture, lighting, and texture — alongside a curated materials list with direct purchase links.",
+            },
+            {
+              n: "06",
+              title: "Refine the materials",
+              body: "You review every item and swap anything that doesn't fit your taste or budget. One round of materials changes is included so the final list reflects exactly what you want to buy.",
+            },
+            {
+              n: "07",
+              title: "Final delivery",
+              body: "You receive the complete design package: final 2D drawings, the 3D rendering, and your full product inventory with purchase links — everything you need to bring the space to life at your own pace.",
+            },
+          ].map((step) => (
+            <li key={step.n} className="flex gap-6">
+              <span className="font-display text-5xl text-accent/20 leading-none select-none shrink-0 w-14 text-right">
+                {step.n}
+              </span>
+              <div>
+                <h3 className="font-display text-xl leading-snug">{step.title}</h3>
+                <p className="mt-2 text-[15px] text-foreground/75 font-light leading-relaxed">
+                  {step.body}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+
       {/* INCLUDED */}
       <section className="bg-muted/50 border-y border-border">
         <div className="mx-auto max-w-7xl px-6 lg:px-12 py-16 grid md:grid-cols-12 gap-10">
