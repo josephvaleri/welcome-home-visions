@@ -134,7 +134,7 @@ export const projects: Project[] = [
     brief:
       "A two-bedroom model apartment highlighting smart space planning and lifestyle flexibility.",
     solution: "Inviting color palettes and considered layouts suited for modern renters.",
-    cover: "/images/portfolio/model_apartment_2_bedroom_1.png",
+    cover: "/images/portfolio/model_apartment_2_bedroom_7.png",
     gallery: [
       "/images/portfolio/model_apartment_2_bedroom_1.png",
       "/images/portfolio/model_apartment_2_bedroom_2.png",
