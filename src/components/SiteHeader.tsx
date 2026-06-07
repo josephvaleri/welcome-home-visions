@@ -18,9 +18,9 @@ export function SiteHeader() {
     <header className="absolute top-0 left-0 right-0 z-30">
       <div className="mx-auto max-w-7xl px-6 lg:px-12 py-6 flex items-center justify-between">
         <Link to="/" className="font-display text-xl md:text-2xl tracking-wide text-foreground">
-          The Welcome Home
+          Your Virtual Decorator
           <span className="block text-[10px] uppercase tracking-[0.25em] text-muted-foreground mt-0.5">
-            Authentic Design Solutions
+            Creating Authentic Spaces
           </span>
         </Link>
         <nav className="hidden md:flex items-center gap-10 text-sm uppercase tracking-[0.18em]">
