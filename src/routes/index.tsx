@@ -44,7 +44,10 @@ function Home() {
               Wherever you live,
               <span className="block italic text-accent">live authentically.</span>
             </h1>
-            <p className="mt-10 text-base md:text-lg leading-relaxed text-foreground/85 max-w-2xl font-light">
+            <p className="mt-6 text-sm uppercase tracking-[0.2em] text-accent/80 font-light">
+              Virtual interior design for the everyday home — serving clients worldwide
+            </p>
+            <p className="mt-8 text-base md:text-lg leading-relaxed text-foreground/85 max-w-2xl font-light">
               Wherever you call home should be your haven — a place that reflects your
               personal story. I can help you through defining functions for rooms and
               areas within rooms, careful space planning to create the desired

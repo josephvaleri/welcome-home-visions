@@ -6,9 +6,9 @@ export function SiteFooter() {
     <footer className="mt-24 border-t border-border bg-muted/40">
       <div className="mx-auto max-w-7xl px-6 lg:px-12 py-12 grid gap-10 md:grid-cols-3 items-start">
         <div>
-          <div className="font-display text-2xl">The Welcome Home</div>
+          <div className="font-display text-2xl">Your Virtual Decorator</div>
           <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground mt-1">
-            Authentic Design Solutions
+            Creating Authentic Spaces
           </p>
           <p className="text-sm text-muted-foreground mt-4 max-w-xs leading-relaxed">
             Interior design from Umbria, Italy — for clients wherever they call home.
@@ -46,7 +46,7 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="border-t border-border py-5 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} The Welcome Home · Jill Valeri
+        © {new Date().getFullYear()} Your Virtual Decorator · Jill Valeri
       </div>
     </footer>
   );
