@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
-import { Instagram, Mail, MapPin } from "lucide-react";
+import { Instagram, Facebook, Mail, MapPin } from "lucide-react";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import { z } from "zod";
@@ -93,6 +93,14 @@ function Contact() {
                 className="inline-flex items-center gap-2 text-foreground/80 hover:text-accent"
               >
                 <Instagram size={16} /> @jill_e_valeri
+              </a>
+              <a
+                href="https://www.facebook.com/search/top?q=your%20virtual%20decorator%3Acreating%20authentic%20spaces"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 text-foreground/80 hover:text-accent"
+              >
+                <Facebook size={16} /> Facebook
               </a>
               <a
                 href="mailto:jill@yourvirtualdecorator.com"
