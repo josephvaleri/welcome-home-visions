@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
-import { useState } from "react";
-import { Instagram, Facebook, Mail, MapPin } from "lucide-react";
+import { Instagram, Mail, MapPin } from "lucide-react";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import { z } from "zod";
@@ -33,8 +32,6 @@ const schema = z.object({
 });
 
 function Contact() {
-  const [submitting, setSubmitting] = useState(false);
-
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
@@ -48,13 +45,14 @@ function Contact() {
       toast.error(parsed.error.issues[0]?.message ?? "Please check the form");
       return;
     }
-    setSubmitting(true);
-    // Local-only confirmation for now
-    setTimeout(() => {
-      setSubmitting(false);
-      (e.target as HTMLFormElement).reset();
-      toast.success("Thank you — I'll be in touch shortly.");
-    }, 600);
+    const { name, email, location, project } = parsed.data;
+    const subject = encodeURIComponent(`New inquiry from ${name}`);
+    const body = encodeURIComponent(
+      `Name: ${name}\nEmail: ${email}\nLocation: ${location ?? "Not provided"}\n\nProject:\n${project}`
+    );
+    window.location.href = `mailto:jill@yourvirtualdecorator.com?subject=${subject}&body=${body}`;
+    (e.target as HTMLFormElement).reset();
+    toast.success("Your email client will open with the message ready to send.");
   };
 
   return (
@@ -97,12 +95,10 @@ function Contact() {
                 <Instagram size={16} /> @jill_e_valeri
               </a>
               <a
-                href="https://www.facebook.com/thewelcomehomeinteriordesignsolutions"
-                target="_blank"
-                rel="noreferrer"
+                href="mailto:jill@yourvirtualdecorator.com"
                 className="inline-flex items-center gap-2 text-foreground/80 hover:text-accent"
               >
-                <Facebook size={16} /> Facebook
+                <Mail size={16} /> Email Jill
               </a>
             </div>
           </div>
@@ -130,10 +126,9 @@ function Contact() {
           </div>
           <button
             type="submit"
-            disabled={submitting}
-            className="w-full bg-primary text-primary-foreground py-4 text-sm uppercase tracking-[0.2em] hover:bg-accent transition-colors disabled:opacity-60"
+            className="w-full bg-primary text-primary-foreground py-4 text-sm uppercase tracking-[0.2em] hover:bg-accent transition-colors"
           >
-            {submitting ? "Sending…" : "Send inquiry"}
+            Submit
           </button>
         </form>
       </section>
