@@ -40,9 +40,6 @@ function Home() {
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12 w-full pt-24 pb-16">
           <div className="max-w-3xl">
-            <span className="text-xs uppercase tracking-[0.35em] text-accent">
-              The Welcome Home
-            </span>
             <h1 className="font-display text-5xl sm:text-6xl md:text-8xl leading-[0.95] mt-6 text-foreground">
               Wherever you live,
               <span className="block italic text-accent">live authentically.</span>
