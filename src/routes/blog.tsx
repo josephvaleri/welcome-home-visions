@@ -1,70 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
-
-const SUBSTACK_RSS = "https://yourvirtualdecorator.substack.com/feed";
-
-interface SubstackPost {
-  title: string;
-  link: string;
-  pubDate: string;
-  excerpt: string;
-  thumbnail: string | null;
-}
-
-function extractTag(xml: string, tag: string): string {
-  const re = new RegExp(
-    `<${tag}[^>]*><!\\[CDATA\\[([\\s\\S]*?)\\]\\]><\\/${tag}>|<${tag}[^>]*>([\\s\\S]*?)<\\/${tag}>`,
-    "i"
-  );
-  const m = xml.match(re);
-  return m ? (m[1] ?? m[2] ?? "").trim() : "";
-}
-
-function extractAttr(xml: string, tag: string, attr: string): string {
-  const re = new RegExp(`<${tag}[^>]*\\s${attr}="([^"]*)"`, "i");
-  const m = xml.match(re);
-  return m ? m[1] : "";
-}
-
-function stripHtml(html: string): string {
-  return html
-    .replace(/<[^>]+>/g, " ")
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'")
-    .replace(/&nbsp;/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-function parseRSS(xml: string): SubstackPost[] {
-  const posts: SubstackPost[] = [];
-  for (const m of xml.matchAll(/<item>([\s\S]*?)<\/item>/gi)) {
-    const item = m[1];
-    const title = stripHtml(extractTag(item, "title"));
-    const link = extractTag(item, "link") || extractTag(item, "guid");
-    const pubDate = extractTag(item, "pubDate");
-    const rawDesc = stripHtml(extractTag(item, "description"));
-    const excerpt = rawDesc.length > 220 ? rawDesc.slice(0, 220).trimEnd() + "…" : rawDesc;
-    const thumbnail = extractAttr(item, "enclosure", "url") || null;
-    if (title && link) posts.push({ title, link, pubDate, excerpt, thumbnail });
-  }
-  return posts;
-}
-
-function formatDate(dateStr: string): string {
-  try {
-    return new Date(dateStr).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-  } catch {
-    return dateStr;
-  }
-}
+import { fetchSubstackPosts, formatPostDate, type SubstackPost } from "@/lib/substack";
 
 export const Route = createFileRoute("/blog")({
   head: () => ({
@@ -79,17 +15,8 @@ export const Route = createFileRoute("/blog")({
     ],
   }),
   loader: async (): Promise<{ posts: SubstackPost[] }> => {
-    try {
-      const res = await fetch(SUBSTACK_RSS, {
-        headers: { "User-Agent": "YourVirtualDecorator/1.0" },
-        signal: AbortSignal.timeout(6000),
-      });
-      if (!res.ok) return { posts: [] };
-      const xml = await res.text();
-      return { posts: parseRSS(xml) };
-    } catch {
-      return { posts: [] };
-    }
+    const posts = await fetchSubstackPosts();
+    return { posts };
   },
   component: Blog,
 });
@@ -153,7 +80,7 @@ function Blog() {
                       </p>
                     )}
                     <div className="mt-5 flex items-center justify-between">
-                      <span className="text-xs text-muted-foreground">{formatDate(post.pubDate)}</span>
+                      <span className="text-xs text-muted-foreground">{formatPostDate(post.pubDate)}</span>
                       <span className="text-xs uppercase tracking-[0.2em] text-accent">
                         Read on Substack →
                       </span>

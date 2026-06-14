@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ArrowRight } from "lucide-react";
+import { fetchSubstackPosts, formatPostDate, type SubstackPost } from "@/lib/substack";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -20,10 +21,15 @@ export const Route = createFileRoute("/")({
       { property: "og:image", content: "/images/portfolio/image40.jpg" },
     ],
   }),
+  loader: async (): Promise<{ recentPosts: SubstackPost[] }> => {
+    const recentPosts = await fetchSubstackPosts(3);
+    return { recentPosts };
+  },
   component: Home,
 });
 
 function Home() {
+  const { recentPosts } = Route.useLoaderData();
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <SiteHeader />
@@ -119,6 +125,50 @@ function Home() {
           </div>
         ))}
       </section>
+
+      {/* FROM THE JOURNAL */}
+      {recentPosts.length > 0 && (
+        <section className="border-t border-border">
+          <div className="mx-auto max-w-7xl px-6 lg:px-12 py-20 grid md:grid-cols-12 gap-12 items-start">
+            <div className="md:col-span-4">
+              <span className="text-xs uppercase tracking-[0.3em] text-accent">From the Journal</span>
+              <h2 className="font-display text-3xl mt-4 leading-snug">
+                Design ideas,<span className="block italic text-accent"> in words.</span>
+              </h2>
+              <Link
+                to="/blog"
+                className="mt-6 inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-foreground/70 hover:text-accent transition-colors"
+              >
+                See all posts <ArrowRight size={14} />
+              </Link>
+            </div>
+            <ul className="md:col-span-8 flex flex-col divide-y divide-border">
+              {recentPosts.map((post) => (
+                <li key={post.link}>
+                  <a
+                    href={post.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group flex items-start justify-between gap-6 py-6 hover:text-accent transition-colors"
+                  >
+                    <span className="font-display text-xl leading-snug group-hover:text-accent transition-colors">
+                      {post.title}
+                    </span>
+                    <div className="shrink-0 text-right">
+                      <span className="block text-xs text-muted-foreground whitespace-nowrap">
+                        {formatPostDate(post.pubDate)}
+                      </span>
+                      <span className="mt-1 block text-xs uppercase tracking-[0.2em] text-accent opacity-0 group-hover:opacity-100 transition-opacity">
+                        Read →
+                      </span>
+                    </div>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
 
       <SiteFooter />
     </div>
