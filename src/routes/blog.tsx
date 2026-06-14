@@ -1,34 +1,102 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
-import { Link } from "@tanstack/react-router";
+
+const SUBSTACK_RSS = "https://yourvirtualdecorator.substack.com/feed";
+
+interface SubstackPost {
+  title: string;
+  link: string;
+  pubDate: string;
+  excerpt: string;
+  thumbnail: string | null;
+}
+
+function extractTag(xml: string, tag: string): string {
+  const re = new RegExp(
+    `<${tag}[^>]*><!\\[CDATA\\[([\\s\\S]*?)\\]\\]><\\/${tag}>|<${tag}[^>]*>([\\s\\S]*?)<\\/${tag}>`,
+    "i"
+  );
+  const m = xml.match(re);
+  return m ? (m[1] ?? m[2] ?? "").trim() : "";
+}
+
+function extractAttr(xml: string, tag: string, attr: string): string {
+  const re = new RegExp(`<${tag}[^>]*\\s${attr}="([^"]*)"`, "i");
+  const m = xml.match(re);
+  return m ? m[1] : "";
+}
+
+function stripHtml(html: string): string {
+  return html
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&nbsp;/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function parseRSS(xml: string): SubstackPost[] {
+  const posts: SubstackPost[] = [];
+  for (const m of xml.matchAll(/<item>([\s\S]*?)<\/item>/gi)) {
+    const item = m[1];
+    const title = stripHtml(extractTag(item, "title"));
+    const link = extractTag(item, "link") || extractTag(item, "guid");
+    const pubDate = extractTag(item, "pubDate");
+    const rawDesc = stripHtml(extractTag(item, "description"));
+    const excerpt = rawDesc.length > 220 ? rawDesc.slice(0, 220).trimEnd() + "…" : rawDesc;
+    const thumbnail = extractAttr(item, "enclosure", "url") || null;
+    if (title && link) posts.push({ title, link, pubDate, excerpt, thumbnail });
+  }
+  return posts;
+}
+
+function formatDate(dateStr: string): string {
+  try {
+    return new Date(dateStr).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  } catch {
+    return dateStr;
+  }
+}
 
 export const Route = createFileRoute("/blog")({
   head: () => ({
     meta: [
-      { title: "Journal — The Welcome Home" },
+      { title: "Journal — Your Virtual Decorator" },
       {
         name: "description",
         content:
-          "Design thinking, project stories, and inspiration from The Welcome Home — an interior design journal.",
+          "Design thinking, project stories, and inspiration from Your Virtual Decorator — an interior design journal by Jill Valeri.",
       },
-      { property: "og:title", content: "Journal — The Welcome Home" },
+      { property: "og:title", content: "Journal — Your Virtual Decorator" },
     ],
   }),
+  loader: async (): Promise<{ posts: SubstackPost[] }> => {
+    try {
+      const res = await fetch(SUBSTACK_RSS, {
+        headers: { "User-Agent": "YourVirtualDecorator/1.0" },
+        signal: AbortSignal.timeout(6000),
+      });
+      if (!res.ok) return { posts: [] };
+      const xml = await res.text();
+      return { posts: parseRSS(xml) };
+    } catch {
+      return { posts: [] };
+    }
+  },
   component: Blog,
 });
 
-// Posts will be added here as the blog grows.
-// Each entry: { slug, title, date, category, excerpt, cover }
-const posts: {
-  slug: string;
-  title: string;
-  date: string;
-  category: string;
-  excerpt: string;
-  cover: string;
-}[] = [];
-
 function Blog() {
+  const { posts } = Route.useLoaderData();
+
   return (
     <PageShell>
       <section className="mx-auto max-w-7xl px-6 lg:px-12 pb-14">
@@ -59,29 +127,54 @@ function Blog() {
         <section className="mx-auto max-w-7xl px-6 lg:px-12 pb-20">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
             {posts.map((post) => (
-              <article key={post.slug} className="group flex flex-col">
-                <div className="overflow-hidden">
-                  <img
-                    src={post.cover}
-                    alt={post.title}
-                    className="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
-                <div className="mt-5 flex flex-col flex-1">
-                  <span className="text-xs uppercase tracking-[0.2em] text-accent">
-                    {post.category}
-                  </span>
-                  <h2 className="font-display text-2xl mt-2 leading-snug group-hover:text-accent transition-colors">
-                    {post.title}
-                  </h2>
-                  <p className="mt-3 text-sm text-foreground/75 font-light leading-relaxed flex-1">
-                    {post.excerpt}
-                  </p>
-                  <span className="mt-4 text-xs text-muted-foreground">{post.date}</span>
+              <article key={post.link} className="group flex flex-col">
+                {post.thumbnail && (
+                  <div className="overflow-hidden">
+                    <img
+                      src={post.thumbnail}
+                      alt={post.title}
+                      className="w-full h-52 object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                )}
+                <div className={`flex flex-col flex-1 border-t border-border pt-6 ${post.thumbnail ? "mt-5" : ""}`}>
+                  <a
+                    href={post.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex flex-col flex-1"
+                  >
+                    <h2 className="font-display text-2xl leading-snug group-hover:text-accent transition-colors">
+                      {post.title}
+                    </h2>
+                    {post.excerpt && (
+                      <p className="mt-3 text-sm text-foreground/75 font-light leading-relaxed flex-1">
+                        {post.excerpt}
+                      </p>
+                    )}
+                    <div className="mt-5 flex items-center justify-between">
+                      <span className="text-xs text-muted-foreground">{formatDate(post.pubDate)}</span>
+                      <span className="text-xs uppercase tracking-[0.2em] text-accent">
+                        Read on Substack →
+                      </span>
+                    </div>
+                  </a>
                 </div>
               </article>
             ))}
           </div>
+
+          <p className="mt-16 text-center text-xs text-muted-foreground">
+            Published on{" "}
+            <a
+              href="https://yourvirtualdecorator.substack.com"
+              target="_blank"
+              rel="noreferrer"
+              className="text-accent hover:underline"
+            >
+              Substack
+            </a>
+          </p>
         </section>
       )}
     </PageShell>
