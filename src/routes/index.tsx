@@ -3,23 +3,18 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ArrowRight } from "lucide-react";
 import { fetchSubstackPosts, formatPostDate, type SubstackPost } from "@/lib/substack";
+import { buildMeta } from "@/lib/seo";
+import { EmailCapture } from "@/components/EmailCapture";
+import { Testimonials } from "@/components/Testimonials";
 
 export const Route = createFileRoute("/")({
   head: () => ({
-    meta: [
-      { title: "The Welcome Home — Authentic Design Solutions" },
-      {
-        name: "description",
-        content:
-          "Interior design by Jill Valeri. From Umbria, Italy — helping clients worldwide live authentically in spaces that reflect their story.",
-      },
-      { property: "og:title", content: "The Welcome Home — Authentic Design Solutions" },
-      {
-        property: "og:description",
-        content: "Wherever you live, live authentically. Virtual interior design with Jill Valeri.",
-      },
-      { property: "og:image", content: "/images/portfolio/image40.jpg" },
-    ],
+    ...buildMeta({
+      title: "Italian Interior Design, Virtually — Your Virtual Decorator",
+      description:
+        "Furnish and lay out a historic Italian home from anywhere — or bring authentic Italian style to the home you have. Virtual design with Jill Valeri, from Umbria.",
+      path: "/",
+    }),
   }),
   loader: async (): Promise<{ recentPosts: SubstackPost[] }> => {
     const recentPosts = await fetchSubstackPosts(3);
@@ -46,25 +41,22 @@ function Home() {
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12 w-full pt-24 pb-16">
           <div className="max-w-3xl">
+            <p className="text-sm uppercase tracking-[0.2em] text-accent/80 font-light">
+              Virtual interior design for historic Italian homes — and Italian style anywhere
+            </p>
             <h1 className="font-display text-5xl sm:text-6xl md:text-8xl leading-[0.95] mt-6 text-foreground">
-              Wherever you live,
-              <span className="block italic text-accent">live authentically.</span>
+              Bring an Italian home
+              <span className="block italic text-accent">to life.</span>
             </h1>
-            <p className="mt-6 text-sm uppercase tracking-[0.2em] text-accent/80 font-light">
-              Virtual interior design for the everyday home — serving clients worldwide
-            </p>
             <p className="mt-8 text-base md:text-lg leading-relaxed text-foreground/85 max-w-2xl font-light">
-              Wherever you call home should be your haven — a place that reflects your
-              personal story. I can help you through defining functions for rooms and
-              areas within rooms, careful space planning to create the desired
-              functionality and mood, and the use of each of the layers of design to
-              create a space that functions well and supports your needs while
-              establishing the mood that reflects your personal style and using elements
-              that help tell your story.
+              You've fallen for a stone farmhouse in Umbria, a village apartment in Tuscany, or
+              simply the way an Italian home <em>feels</em>. I help you make it real — laying out
+              rooms that work for modern life, choosing finishes and furnishings that honor the
+              building's history, and sourcing every piece — entirely online, wherever you and the
+              house happen to be.
             </p>
-            <p className="mt-6 text-base md:text-lg leading-relaxed text-foreground/85 max-w-2xl font-light">
-              I am able to work with clients all over the world through the use of modern
-              technology to create compelling designs virtually.
+            <p className="mt-5 text-base md:text-lg leading-relaxed text-foreground/85 max-w-2xl font-light">
+              I work with clients all over the world, entirely virtually.
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4">
@@ -89,9 +81,9 @@ function Home() {
       <section className="bg-secondary text-secondary-foreground">
         <div className="mx-auto max-w-5xl px-6 lg:px-12 py-20 text-center">
           <p className="font-display italic text-3xl md:text-4xl leading-snug">
-            “Your home should tell the story of who you are,
+            "Your home should tell the story of who you are,
             <br className="hidden md:block" />
-            and be a collection of what you love.”
+            and be a collection of what you love."
           </p>
           <p className="mt-6 text-xs uppercase tracking-[0.3em] opacity-70">
             — Designed from Umbria, Italy · Available worldwide
@@ -99,8 +91,50 @@ function Home() {
         </div>
       </section>
 
+      {/* WHO I HELP — TWO PATH SECTION */}
+      <section className="mx-auto max-w-7xl px-6 lg:px-12 py-24">
+        <div className="text-center mb-14">
+          <span className="text-xs uppercase tracking-[0.3em] text-accent">Who I help</span>
+          <h2 className="font-display text-4xl mt-4">Two paths,<span className="italic text-accent"> one designer.</span></h2>
+        </div>
+        <div className="grid md:grid-cols-2 gap-8">
+          <div className="border border-border bg-card p-10 flex flex-col">
+            <span className="text-xs uppercase tracking-[0.25em] text-accent">Renovating in Italy</span>
+            <h3 className="font-display text-3xl mt-4 leading-snug">
+              You bought the house.<br />Now make it a home.
+            </h3>
+            <p className="mt-5 text-[15px] leading-relaxed text-foreground/80 font-light flex-1">
+              For expats and second-home owners furnishing a historic Italian property — from abroad,
+              with someone who lives here.
+            </p>
+            <Link
+              to="/renovating-in-italy"
+              className="mt-8 inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-accent hover:text-foreground transition-colors"
+            >
+              How it works <ArrowRight size={14} />
+            </Link>
+          </div>
+          <div className="border border-border bg-card p-10 flex flex-col">
+            <span className="text-xs uppercase tracking-[0.25em] text-accent">Italian style, anywhere</span>
+            <h3 className="font-display text-3xl mt-4 leading-snug">
+              Want that Italian<br />feeling at home?
+            </h3>
+            <p className="mt-5 text-[15px] leading-relaxed text-foreground/80 font-light flex-1">
+              Bring the warmth, light, and soul of an Italian interior to the home you already love —
+              wherever in the world it is.
+            </p>
+            <Link
+              to="/italian-style-at-home"
+              className="mt-8 inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-accent hover:text-foreground transition-colors"
+            >
+              Get the look <ArrowRight size={14} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* THREE COLUMN VALUES */}
-      <section className="mx-auto max-w-7xl px-6 lg:px-12 py-24 grid md:grid-cols-3 gap-12">
+      <section className="mx-auto max-w-7xl px-6 lg:px-12 pb-24 grid md:grid-cols-3 gap-12">
         {[
           {
             n: "01",
@@ -125,6 +159,12 @@ function Home() {
           </div>
         ))}
       </section>
+
+      {/* TESTIMONIALS */}
+      <Testimonials />
+
+      {/* LEAD CAPTURE BAND */}
+      <EmailCapture variant="band" magnet="italian-home-starter" />
 
       {/* FROM THE JOURNAL */}
       {recentPosts.length > 0 && (

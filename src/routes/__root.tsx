@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { professionalServiceJsonLd, SITE_URL } from "../lib/seo";
 
 function NotFoundComponent() {
   return (
@@ -77,13 +78,22 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "The Welcome Home — Authentic Design Solutions" },
-      { name: "description", content: "Interior design services by Jill Valeri — The Welcome Home." },
+      { title: "Italian Interior Design, Virtually — Your Virtual Decorator" },
+      {
+        name: "description",
+        content:
+          "Virtual interior design for historic Italian homes — and Italian-inspired interiors anywhere. From Umbria, with Jill Valeri.",
+      },
       { name: "theme-color", content: "#C45F3A" },
-      { property: "og:title", content: "The Welcome Home" },
-      { property: "og:description", content: "Authentic Design Solutions by Jill Valeri." },
+      { property: "og:title", content: "Your Virtual Decorator — Jill Valeri" },
+      {
+        property: "og:description",
+        content: "Virtual interior design for historic Italian homes and Italian-inspired interiors worldwide.",
+      },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
+      { property: "og:url", content: SITE_URL },
+      { property: "og:image", content: `${SITE_URL}/images/portfolio/image40.jpg` },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -119,6 +129,10 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceJsonLd()) }}
+      />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
     </QueryClientProvider>

@@ -1,25 +1,23 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 import { PageShell } from "@/components/PageShell";
 import { Instagram, Facebook, Mail, MapPin } from "lucide-react";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import { z } from "zod";
+import { buildMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/contact")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    segment: (search.segment as string | undefined) ?? "",
+  }),
   head: () => ({
-    meta: [
-      { title: "Contact — The Welcome Home" },
-      {
-        name: "description",
-        content: "Begin a project with Jill Valeri. Virtual interior design, worldwide.",
-      },
-      { property: "og:title", content: "Contact — The Welcome Home" },
-      {
-        property: "og:description",
-        content: "Tell us about your space — Jill will be in touch.",
-      },
-      { property: "og:image", content: "/images/portfolio/image31.jpg" },
-    ],
+    ...buildMeta({
+      title: "Contact — Your Virtual Decorator",
+      description: "Begin a project with Jill Valeri. Virtual interior design, worldwide.",
+      path: "/contact",
+      image: "/images/portfolio/image31.jpg",
+    }),
   }),
   component: Contact,
 });
@@ -28,17 +26,32 @@ const schema = z.object({
   name: z.string().trim().min(1, "Please enter your name").max(100),
   email: z.string().trim().email("Enter a valid email").max(200),
   location: z.string().trim().max(120).optional(),
+  segment: z.string().optional(),
   project: z.string().trim().min(10, "Tell me a little about your project").max(2000),
 });
 
+const SEGMENT_OPTIONS = [
+  { value: "italy", label: "Renovating a home in Italy" },
+  { value: "style", label: "Want Italian style where I live" },
+  { value: "other", label: "Something else" },
+] as const;
+
 function Contact() {
+  const { segment } = Route.useSearch();
+  const defaultSegment =
+    segment === "italy" ? "italy" : segment === "style" ? "style" : "other";
+  const [selectedSegment, setSelectedSegment] = useState<string>(defaultSegment);
+
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
+    const segmentLabel =
+      SEGMENT_OPTIONS.find((o) => o.value === selectedSegment)?.label ?? selectedSegment;
     const parsed = schema.safeParse({
       name: fd.get("name"),
       email: fd.get("email"),
       location: fd.get("location") || undefined,
+      segment: segmentLabel,
       project: fd.get("project"),
     });
     if (!parsed.success) {
@@ -48,7 +61,7 @@ function Contact() {
     const { name, email, location, project } = parsed.data;
     const subject = encodeURIComponent(`New inquiry from ${name}`);
     const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\nLocation: ${location ?? "Not provided"}\n\nProject:\n${project}`
+      `Name: ${name}\nEmail: ${email}\nLocation: ${location ?? "Not provided"}\nI am: ${segmentLabel}\n\nProject:\n${project}`
     );
     window.location.href = `mailto:jill@yourvirtualdecorator.com?subject=${subject}&body=${body}`;
     (e.target as HTMLFormElement).reset();
@@ -119,6 +132,31 @@ function Contact() {
           <Field label="Your name" name="name" required />
           <Field label="Email" name="email" type="email" required />
           <Field label="Where is the project?" name="location" placeholder="City, Country" />
+
+          {/* Segment selector */}
+          <div>
+            <label className="text-xs uppercase tracking-[0.2em] text-muted-foreground block mb-3">
+              What best describes you?
+            </label>
+            <div className="flex flex-col gap-2">
+              {SEGMENT_OPTIONS.map((opt) => (
+                <label key={opt.value} className="flex items-center gap-3 cursor-pointer group">
+                  <input
+                    type="radio"
+                    name="segment"
+                    value={opt.value}
+                    checked={selectedSegment === opt.value}
+                    onChange={() => setSelectedSegment(opt.value)}
+                    className="accent-[oklch(0.55_0.12_35)] w-4 h-4 shrink-0"
+                  />
+                  <span className="text-[15px] text-foreground/80 group-hover:text-foreground transition-colors">
+                    {opt.label}
+                  </span>
+                </label>
+              ))}
+            </div>
+          </div>
+
           <div>
             <label className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
               About the project

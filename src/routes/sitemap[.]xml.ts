@@ -1,14 +1,27 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
+import { projects } from "../lib/projects";
 
-const BASE_URL = "";
+const BASE_URL = "https://www.yourvirtualdecorator.com";
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
       GET: async () => {
-        const paths = ["/", "/about", "/services", "/portfolio", "/contact"];
-        const urls = paths
+        const staticPaths = [
+          "/",
+          "/about",
+          "/services",
+          "/portfolio",
+          "/contact",
+          "/blog",
+          "/news",
+          "/renovating-in-italy",
+          "/italian-style-at-home",
+        ];
+        const projectPaths = projects.map((p) => `/project/${p.slug}`);
+        const allPaths = [...staticPaths, ...projectPaths];
+        const urls = allPaths
           .map(
             (p) =>
               `  <url>\n    <loc>${BASE_URL}${p}</loc>\n    <changefreq>monthly</changefreq>\n  </url>`,

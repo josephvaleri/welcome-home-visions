@@ -11,8 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicesRouteImport } from './routes/services'
+import { Route as RenovatingInItalyRouteImport } from './routes/renovating-in-italy'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as NewsRouteImport } from './routes/news'
+import { Route as ItalianStyleAtHomeRouteImport } from './routes/italian-style-at-home'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AboutRouteImport } from './routes/about'
@@ -29,6 +31,11 @@ const ServicesRoute = ServicesRouteImport.update({
   path: '/services',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RenovatingInItalyRoute = RenovatingInItalyRouteImport.update({
+  id: '/renovating-in-italy',
+  path: '/renovating-in-italy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PortfolioRoute = PortfolioRouteImport.update({
   id: '/portfolio',
   path: '/portfolio',
@@ -37,6 +44,11 @@ const PortfolioRoute = PortfolioRouteImport.update({
 const NewsRoute = NewsRouteImport.update({
   id: '/news',
   path: '/news',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ItalianStyleAtHomeRoute = ItalianStyleAtHomeRouteImport.update({
+  id: '/italian-style-at-home',
+  path: '/italian-style-at-home',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -70,8 +82,10 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/blog': typeof BlogRoute
   '/contact': typeof ContactRoute
+  '/italian-style-at-home': typeof ItalianStyleAtHomeRoute
   '/news': typeof NewsRoute
   '/portfolio': typeof PortfolioRoute
+  '/renovating-in-italy': typeof RenovatingInItalyRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/project/$slug': typeof ProjectSlugRoute
@@ -81,8 +95,10 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/blog': typeof BlogRoute
   '/contact': typeof ContactRoute
+  '/italian-style-at-home': typeof ItalianStyleAtHomeRoute
   '/news': typeof NewsRoute
   '/portfolio': typeof PortfolioRoute
+  '/renovating-in-italy': typeof RenovatingInItalyRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/project/$slug': typeof ProjectSlugRoute
@@ -93,8 +109,10 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/blog': typeof BlogRoute
   '/contact': typeof ContactRoute
+  '/italian-style-at-home': typeof ItalianStyleAtHomeRoute
   '/news': typeof NewsRoute
   '/portfolio': typeof PortfolioRoute
+  '/renovating-in-italy': typeof RenovatingInItalyRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/project/$slug': typeof ProjectSlugRoute
@@ -106,8 +124,10 @@ export interface FileRouteTypes {
     | '/about'
     | '/blog'
     | '/contact'
+    | '/italian-style-at-home'
     | '/news'
     | '/portfolio'
+    | '/renovating-in-italy'
     | '/services'
     | '/sitemap.xml'
     | '/project/$slug'
@@ -117,8 +137,10 @@ export interface FileRouteTypes {
     | '/about'
     | '/blog'
     | '/contact'
+    | '/italian-style-at-home'
     | '/news'
     | '/portfolio'
+    | '/renovating-in-italy'
     | '/services'
     | '/sitemap.xml'
     | '/project/$slug'
@@ -128,8 +150,10 @@ export interface FileRouteTypes {
     | '/about'
     | '/blog'
     | '/contact'
+    | '/italian-style-at-home'
     | '/news'
     | '/portfolio'
+    | '/renovating-in-italy'
     | '/services'
     | '/sitemap.xml'
     | '/project/$slug'
@@ -140,8 +164,10 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   BlogRoute: typeof BlogRoute
   ContactRoute: typeof ContactRoute
+  ItalianStyleAtHomeRoute: typeof ItalianStyleAtHomeRoute
   NewsRoute: typeof NewsRoute
   PortfolioRoute: typeof PortfolioRoute
+  RenovatingInItalyRoute: typeof RenovatingInItalyRoute
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ProjectSlugRoute: typeof ProjectSlugRoute
@@ -163,6 +189,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/renovating-in-italy': {
+      id: '/renovating-in-italy'
+      path: '/renovating-in-italy'
+      fullPath: '/renovating-in-italy'
+      preLoaderRoute: typeof RenovatingInItalyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/portfolio': {
       id: '/portfolio'
       path: '/portfolio'
@@ -175,6 +208,13 @@ declare module '@tanstack/react-router' {
       path: '/news'
       fullPath: '/news'
       preLoaderRoute: typeof NewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/italian-style-at-home': {
+      id: '/italian-style-at-home'
+      path: '/italian-style-at-home'
+      fullPath: '/italian-style-at-home'
+      preLoaderRoute: typeof ItalianStyleAtHomeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -220,8 +260,10 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   BlogRoute: BlogRoute,
   ContactRoute: ContactRoute,
+  ItalianStyleAtHomeRoute: ItalianStyleAtHomeRoute,
   NewsRoute: NewsRoute,
   PortfolioRoute: PortfolioRoute,
+  RenovatingInItalyRoute: RenovatingInItalyRoute,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   ProjectSlugRoute: ProjectSlugRoute,
