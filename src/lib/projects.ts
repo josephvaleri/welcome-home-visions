@@ -204,7 +204,18 @@ export const projects: Project[] = [
       "A historic residence in Montefalco, Italy needed a single built-in piece to serve as a wine bar with storage, conceal a large washer and dryer, and evoke the warmth of a wine lounge and gaming area — all while respecting the ancient dwelling's traditional character.",
     solution:
       "Custom built-in cabinetry designed in collaboration with a local carpenter — wood species and stain matched to the original ceiling beams, open shelving for practical storage and display, finished to the quality of fine furniture. Modern conveniences disappear; the room reads as always having been there.",
-    gallery: [],
+    cover: "/images/portfolio/umbrian_wine_lounge_1.jpg",
+    gallery: [
+      "/images/portfolio/umbrian_wine_lounge_1.jpg",
+      "/images/portfolio/umbrian_wine_lounge_2.jpg",
+      "/images/portfolio/umbrian_wine_lounge_3.jpg",
+      "/images/portfolio/umbrian_wine_lounge_4.jpg",
+      "/images/portfolio/umbrian_wine_lounge_5.jpg",
+      "/images/portfolio/umbrian_wine_lounge_6.jpg",
+      "/images/portfolio/umbrian_wine_lounge_7.jpg",
+      "/images/portfolio/umbrian_wine_lounge_8.jpg",
+      "/images/portfolio/umbrian_wine_lounge_9.jpg",
+    ],
   },
 ];
 
