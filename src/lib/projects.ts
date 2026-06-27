@@ -4,7 +4,7 @@ export type Project = {
   brief: string;
   solution: string;
   challenges?: string;
-  cover: string;
+  cover?: string;
   gallery: string[];
 };
 
@@ -196,6 +196,15 @@ export const projects: Project[] = [
       "/images/portfolio/stainmaster_3.png",
       "/images/portfolio/stainmaster_4.png",
     ],
+  },
+  {
+    slug: "umbrian-wine-lounge-laundry-room",
+    title: "Umbrian Wine Lounge / Laundry Room",
+    brief:
+      "A historic residence in Montefalco, Italy needed a single built-in piece to serve as a wine bar with storage, conceal a large washer and dryer, and evoke the warmth of a wine lounge and gaming area — all while respecting the ancient dwelling's traditional character.",
+    solution:
+      "Custom built-in cabinetry designed in collaboration with a local carpenter — wood species and stain matched to the original ceiling beams, open shelving for practical storage and display, finished to the quality of fine furniture. Modern conveniences disappear; the room reads as always having been there.",
+    gallery: [],
   },
 ];
 

@@ -47,11 +47,19 @@ function Portfolio() {
           >
             <div className="md:col-span-7">
               <Link to="/project/$slug" params={{ slug: p.slug }}>
-                <img
-                  src={p.cover}
-                  alt={p.title}
-                  className="w-full h-[420px] md:h-[520px] object-cover transition-opacity hover:opacity-90"
-                />
+                {p.cover ? (
+                  <img
+                    src={p.cover}
+                    alt={p.title}
+                    className="w-full h-[420px] md:h-[520px] object-cover transition-opacity hover:opacity-90"
+                  />
+                ) : (
+                  <div className="w-full h-[420px] md:h-[520px] bg-muted border border-border flex items-center justify-center">
+                    <span className="text-xs uppercase tracking-[0.25em] text-muted-foreground">
+                      Photos coming soon
+                    </span>
+                  </div>
+                )}
               </Link>
             </div>
             <div className="md:col-span-5">

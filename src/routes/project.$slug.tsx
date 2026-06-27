@@ -56,11 +56,19 @@ function ProjectDetail() {
       {/* Hero */}
       <section className="mx-auto max-w-7xl px-6 lg:px-12 pb-12 grid md:grid-cols-12 gap-10 items-end">
         <div className="md:col-span-8">
-          <img
-            src={project.cover}
-            alt={project.title}
-            className="w-full h-[480px] md:h-[580px] object-cover"
-          />
+          {project.cover ? (
+            <img
+              src={project.cover}
+              alt={project.title}
+              className="w-full h-[480px] md:h-[580px] object-cover"
+            />
+          ) : (
+            <div className="w-full h-[480px] md:h-[580px] bg-muted border border-border flex items-center justify-center">
+              <span className="text-xs uppercase tracking-[0.25em] text-muted-foreground">
+                Photos coming soon
+              </span>
+            </div>
+          )}
         </div>
         <div className="md:col-span-4">
           <span className="text-xs uppercase tracking-[0.25em] text-accent">
