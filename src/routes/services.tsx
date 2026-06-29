@@ -200,6 +200,33 @@ function Services() {
             </div>
           ))}
         </div>
+
+        {/* VIRTUAL CONSULTATION */}
+        <div className="mt-8 border border-border bg-card p-10 grid md:grid-cols-2 gap-10 items-center">
+          <div>
+            <h3 className="font-display text-3xl">Virtual Consultation</h3>
+            <div className="mt-6 flex items-baseline gap-2">
+              <span className="font-display text-6xl text-accent">€125</span>
+            </div>
+          </div>
+          <div>
+            <p className="text-[15px] leading-relaxed text-foreground/80 font-light">
+              Not ready to commit to a full design package? A Virtual Consultation is an easy,
+              lower-commitment way to get professional guidance for your project.
+            </p>
+            <p className="mt-4 text-[15px] leading-relaxed text-foreground/80 font-light">
+              During the consultation, we can discuss your space, design challenges, ideas,
+              priorities, and next steps. You will leave with practical recommendations and a
+              clearer direction for moving your project forward.
+            </p>
+            <Link
+              to="/contact"
+              className="mt-8 inline-block w-full text-center bg-primary text-primary-foreground py-3 text-sm uppercase tracking-[0.2em] hover:bg-accent transition-colors"
+            >
+              Book a Virtual Consultation
+            </Link>
+          </div>
+        </div>
       </section>
     </PageShell>
   );
