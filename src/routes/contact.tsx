@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { PageShell } from "@/components/PageShell";
-import { Instagram, Facebook, Mail, MapPin } from "lucide-react";
+import { Instagram, Facebook, Mail, MapPin, Newspaper } from "lucide-react";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import { z } from "zod";
@@ -120,6 +120,14 @@ function Contact() {
                 className="inline-flex items-center gap-2 text-foreground/80 hover:text-accent"
               >
                 <Mail size={16} /> Email Jill
+              </a>
+              <a
+                href="https://substack.com/@jillvaleri"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 text-foreground/80 hover:text-accent"
+              >
+                <Newspaper size={16} /> Substack
               </a>
             </div>
           </div>
