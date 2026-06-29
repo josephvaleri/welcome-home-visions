@@ -9,6 +9,77 @@ export type Project = {
 };
 
 export const projects: Project[] = [
+  // ── Pinned order ──────────────────────────────────────────────────────────
+  {
+    slug: "umbrian-wine-lounge-laundry-room",
+    title: "Umbrian Wine Lounge / Laundry Room",
+    brief:
+      "A historic residence in Montefalco, Italy needed a single built-in piece to serve as a wine bar with storage, conceal a large washer and dryer, and evoke the warmth of a wine lounge and gaming area — all while respecting the ancient dwelling's traditional character.",
+    solution:
+      "Custom built-in cabinetry designed in collaboration with a local carpenter — wood species and stain matched to the original ceiling beams, open shelving for practical storage and display, finished to the quality of fine furniture. Modern conveniences disappear; the room reads as always having been there.",
+    cover: "/images/portfolio/umbrian_wine_lounge_1.jpg",
+    gallery: [
+      "/images/portfolio/umbrian_wine_lounge_1.jpg",
+      "/images/portfolio/umbrian_wine_lounge_2.jpg",
+      "/images/portfolio/umbrian_wine_lounge_3.jpg",
+      "/images/portfolio/umbrian_wine_lounge_4.jpg",
+      "/images/portfolio/umbrian_wine_lounge_5.jpg",
+      "/images/portfolio/umbrian_wine_lounge_6.jpg",
+      "/images/portfolio/umbrian_wine_lounge_7.jpg",
+      "/images/portfolio/umbrian_wine_lounge_8.jpg",
+      "/images/portfolio/umbrian_wine_lounge_9.jpg",
+    ],
+  },
+  {
+    slug: "purple-passion-maryland-life-magazine",
+    title: "Purple Passion — Maryland Life Magazine",
+    brief: "A bold, expressive project featured in Maryland Life Magazine.",
+    solution:
+      "Layered purple tones, custom furnishings, and dynamic contrasts — drama meets livability with an editorial sensibility.",
+    cover: "/images/portfolio/purple_passion_1.png",
+    gallery: [
+      "/images/portfolio/purple_passion_1.png",
+      "/images/portfolio/purple_passion_2.png",
+      "/images/portfolio/purple_passion_3.png",
+      "/images/portfolio/purple_passion_4.png",
+      "/images/portfolio/purple_passion_5.png",
+      "/images/portfolio/purple_passion_6.png",
+      "/images/portfolio/purple_passion_7.png",
+      "/images/portfolio/purple_passion_8.png",
+    ],
+  },
+  {
+    slug: "stainmaster-carpet-sweepstakes-winner",
+    title: "Stainmaster Carpet Sweepstakes Winner",
+    brief: "A vibrant, lifestyle-forward space for the winner of a national sweepstakes.",
+    solution:
+      "Saturated color, durable materials, and high-performing carpets — comfort that holds up to real life.",
+    cover: "/images/portfolio/stainmaster_1.png",
+    gallery: [
+      "/images/portfolio/stainmaster_1.png",
+      "/images/portfolio/stainmaster_2.png",
+      "/images/portfolio/stainmaster_3.png",
+      "/images/portfolio/stainmaster_4.png",
+    ],
+  },
+  {
+    slug: "adding-character-to-new-construction",
+    title: "Adding Character to New Construction",
+    brief:
+      "Fresh architectural details and tailored furnishings give a new home warmth, character, and a sense of history.",
+    solution:
+      "Board & batten paneling for a quiet reading and piano space; raised panel moulding in the dining room; hand-printed wallpaper in the powder room.",
+    cover: "/images/portfolio/adding_character_1.png",
+    gallery: [
+      "/images/portfolio/adding_character_1.png",
+      "/images/portfolio/adding_character_2.png",
+      "/images/portfolio/adding_character_3.png",
+      "/images/portfolio/adding_character_4.png",
+      "/images/portfolio/adding_character_5.png",
+      "/images/portfolio/adding_character_6.png",
+    ],
+  },
+  // ── Remaining projects ────────────────────────────────────────────────────
   {
     slug: "confusing-condo-conquered",
     title: "Confusing Condo — Conquered",
@@ -17,9 +88,7 @@ export const projects: Project[] = [
     solution:
       "Distinct functional zones with uninterrupted flow. A compact footprint made to feel purposeful and calm.",
     cover: "/images/portfolio/confusing_condo.png",
-    gallery: [
-      "/images/portfolio/confusing_condo.png",
-    ],
+    gallery: ["/images/portfolio/confusing_condo.png"],
   },
   {
     slug: "bringing-a-great-room-into-scale",
@@ -58,23 +127,6 @@ export const projects: Project[] = [
     gallery: [
       "/images/portfolio/golfer_1.jpg",
       "/images/portfolio/golfer_2.jpg",
-    ],
-  },
-  {
-    slug: "adding-character-to-new-construction",
-    title: "Adding Character to New Construction",
-    brief:
-      "Fresh architectural details and tailored furnishings give a new home warmth, character, and a sense of history.",
-    solution:
-      "Board & batten paneling for a quiet reading and piano space; raised panel moulding in the dining room; hand-printed wallpaper in the powder room.",
-    cover: "/images/portfolio/adding_character_1.png",
-    gallery: [
-      "/images/portfolio/adding_character_1.png",
-      "/images/portfolio/adding_character_2.png",
-      "/images/portfolio/adding_character_3.png",
-      "/images/portfolio/adding_character_4.png",
-      "/images/portfolio/adding_character_5.png",
-      "/images/portfolio/adding_character_6.png",
     ],
   },
   {
@@ -163,58 +215,6 @@ export const projects: Project[] = [
       "/images/portfolio/primary_bedroom_1.png",
       "/images/portfolio/primary_bedroom_2.png",
       "/images/portfolio/primary_bedroom_3.png",
-    ],
-  },
-  {
-    slug: "purple-passion-maryland-life-magazine",
-    title: "Purple Passion — Maryland Life Magazine",
-    brief: "A bold, expressive project featured in Maryland Life Magazine.",
-    solution:
-      "Layered purple tones, custom furnishings, and dynamic contrasts — drama meets livability with an editorial sensibility.",
-    cover: "/images/portfolio/purple_passion_1.png",
-    gallery: [
-      "/images/portfolio/purple_passion_1.png",
-      "/images/portfolio/purple_passion_2.png",
-      "/images/portfolio/purple_passion_3.png",
-      "/images/portfolio/purple_passion_4.png",
-      "/images/portfolio/purple_passion_5.png",
-      "/images/portfolio/purple_passion_6.png",
-      "/images/portfolio/purple_passion_7.png",
-      "/images/portfolio/purple_passion_8.png",
-    ],
-  },
-  {
-    slug: "stainmaster-carpet-sweepstakes-winner",
-    title: "Stainmaster Carpet Sweepstakes Winner",
-    brief: "A vibrant, lifestyle-forward space for the winner of a national sweepstakes.",
-    solution:
-      "Saturated color, durable materials, and high-performing carpets — comfort that holds up to real life.",
-    cover: "/images/portfolio/stainmaster_1.png",
-    gallery: [
-      "/images/portfolio/stainmaster_1.png",
-      "/images/portfolio/stainmaster_2.png",
-      "/images/portfolio/stainmaster_3.png",
-      "/images/portfolio/stainmaster_4.png",
-    ],
-  },
-  {
-    slug: "umbrian-wine-lounge-laundry-room",
-    title: "Umbrian Wine Lounge / Laundry Room",
-    brief:
-      "A historic residence in Montefalco, Italy needed a single built-in piece to serve as a wine bar with storage, conceal a large washer and dryer, and evoke the warmth of a wine lounge and gaming area — all while respecting the ancient dwelling's traditional character.",
-    solution:
-      "Custom built-in cabinetry designed in collaboration with a local carpenter — wood species and stain matched to the original ceiling beams, open shelving for practical storage and display, finished to the quality of fine furniture. Modern conveniences disappear; the room reads as always having been there.",
-    cover: "/images/portfolio/umbrian_wine_lounge_1.jpg",
-    gallery: [
-      "/images/portfolio/umbrian_wine_lounge_1.jpg",
-      "/images/portfolio/umbrian_wine_lounge_2.jpg",
-      "/images/portfolio/umbrian_wine_lounge_3.jpg",
-      "/images/portfolio/umbrian_wine_lounge_4.jpg",
-      "/images/portfolio/umbrian_wine_lounge_5.jpg",
-      "/images/portfolio/umbrian_wine_lounge_6.jpg",
-      "/images/portfolio/umbrian_wine_lounge_7.jpg",
-      "/images/portfolio/umbrian_wine_lounge_8.jpg",
-      "/images/portfolio/umbrian_wine_lounge_9.jpg",
     ],
   },
 ];
