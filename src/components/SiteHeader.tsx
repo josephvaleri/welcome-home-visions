@@ -31,6 +31,12 @@ const mobileLinks = [
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [workOpen, setWorkOpen] = useState(false);
+  const [workLocked, setWorkLocked] = useState(false);
+
+  const closeWork = () => {
+    setWorkOpen(false);
+    setWorkLocked(false);
+  };
 
   return (
     <header className="absolute top-0 left-0 right-0 z-30">
@@ -63,11 +69,19 @@ export function SiteHeader() {
           <div
             className="relative"
             onMouseEnter={() => setWorkOpen(true)}
-            onMouseLeave={() => setWorkOpen(false)}
+            onMouseLeave={() => { if (!workLocked) setWorkOpen(false); }}
           >
             <button
-              className="flex items-center gap-1 text-foreground/80 hover:text-accent transition-colors uppercase tracking-[0.18em] text-sm cursor-default"
+              className="flex items-center gap-1 text-foreground/80 hover:text-accent transition-colors uppercase tracking-[0.18em] text-sm cursor-pointer"
               aria-expanded={workOpen}
+              onClick={() => {
+                if (workLocked) {
+                  closeWork();
+                } else {
+                  setWorkLocked(true);
+                  setWorkOpen(true);
+                }
+              }}
             >
               Work with me
               <ChevronDown
@@ -76,17 +90,21 @@ export function SiteHeader() {
               />
             </button>
             {workOpen && (
-              <div className="absolute top-full left-0 mt-2 w-52 bg-background border border-border shadow-md py-2 z-40">
-                {workLinks.map((l) => (
-                  <Link
-                    key={l.to}
-                    to={l.to}
-                    className="block px-5 py-2.5 text-xs uppercase tracking-[0.18em] text-foreground/80 hover:text-accent hover:bg-muted/40 transition-colors"
-                    onClick={() => setWorkOpen(false)}
-                  >
-                    {l.label}
-                  </Link>
-                ))}
+              /* pt-2 bridges the gap between button and panel so onMouseLeave
+                 doesn't fire mid-transit when using hover only */
+              <div className="absolute top-full left-0 pt-2 w-52 z-40">
+                <div className="bg-background border border-border shadow-md py-2">
+                  {workLinks.map((l) => (
+                    <Link
+                      key={l.to}
+                      to={l.to}
+                      className="block px-5 py-2.5 text-xs uppercase tracking-[0.18em] text-foreground/80 hover:text-accent hover:bg-muted/40 transition-colors"
+                      onClick={closeWork}
+                    >
+                      {l.label}
+                    </Link>
+                  ))}
+                </div>
               </div>
             )}
           </div>
